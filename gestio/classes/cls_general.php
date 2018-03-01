@@ -1,8 +1,23 @@
 <?php
+class general extends connexio {
+    var $con;
+    
+    function general($ruta="../../") {
+        parent::connexio($ruta);
+    }
+    
+    function llistar_autors() {
+        $sql='SELECT AUT_IDAUTOR FROM AUTORS';
+        $rs=$this->DB_Select($sql);
+        $i=1;
+        while ($rs_f=$this->DB_Fetch($rs)) {
+            $aut = new autor();
+            $aut->inicialitza($rs_f['AUT_IDAUTOR']);
+            $items[$i]=serialize($aut);
+            $i=$i+1;
+        }
+    }
+}
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+?>
 
