@@ -11,11 +11,12 @@ class autor extends connexio {
     }
     
     function inicialitza($id) {
-        $this->aut_idautor = $id;
-        if ($this->aut_idautor == 0) {
-            $this->aut_autor = "";
+        $this->aut_idautor=$id;
+        if ($this->aut_idautor==0) {
+            $this->aut_autor="";
         } else {
-            $sql="SELECT AUTORS.AUT_IDAUTOR, AUTORS.AUTO_AUTOR, FROM (AUTORS WHERE AUTORS.AUT_IDAUTOR".$id.")";
+            $sql="SELECT AUTORS.AUT_IDAUTOR, AUTORS.AUT_AUTOR ".
+            "FROM AUTORS WHERE (((AUTORS.AUT_IDAUTOR)=".$id."))";
             $rs= $this->DB_Select($sql);
             $rs= $this->DB_Fetch($rs);
             $this->aut_autor = $rs['AUT_AUTOR'];

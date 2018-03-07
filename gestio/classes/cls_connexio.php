@@ -14,12 +14,28 @@ class connexio {
         $this->password="roger";
     }
     
-    function DB_Open() {
-        $this->con = mysql_connect($this->host, $this->user, $this->password);
-        if ($this->con) {
-            if (!mysqli_select_db($$this->con, $this->db)) {
+//   // function DB_Open() {
+//       // $this->con = mysqli_connect($this->host, $this->user, $this->password);
+//        //if ($this->con) {
+//          //  if (!mysqli_select_db($this->con, $this->db)) {
+//           /     $status = mysqli_error();
+//            } else {
+//                $status=0;
+//            }
+//        } else {
+//            $status = mysqli_error();
+//        }
+//     //   echo $status;
+//        return ($status);
+//   // }
+//    
+       function DB_Open(){
+        $this->con =  mysqli_connect($this->host, $this->user, $this->password);
+        if ($this->con){
+            if (! mysqli_select_db($this->con, $this->db)){
                 $status = mysqli_error();
-            } else {
+            }
+            else{
                 $status=0;
             }
         } else {
@@ -36,34 +52,62 @@ class connexio {
         }
         return ($status);
     }
+//    
+//    function DB_Select($strSelect) {
+//        $this->DB_Open();
+//        $result = mysqli_query($this->con,$strSelect);
+//        if ($result) {
+//            if (mysqli_num_rows($result) > 0) {
+//                return ($result);
+//            } else {
+//                return (0);  
+//            }
+//        } else {
+//            $result = mysqli_err();
+//        }
+//        $this->DB_Close();
+//    }
     
-    function DB_Select($strSelect) {
+       function DB_Select($strSelect){
         $this->DB_Open();
-        $result = mysqli_query($this->con, $strSelect);
-        if ($result) {
-            if (mysqli_num_rows($result) > 0) {
+        $result = mysqli_query($this->con,$strSelect);
+        if($result){
+            if (mysqli_num_rows($result) > 0){
                 return ($result);
             } else {
-                return 0;  
+                return (0);
             }
         } else {
-            $result = mysqli_err();
+            $result = mysqli_error();
         }
-        $this->DB_Close();
+        $this->DB_Close();   
     }
     
     function DB_Execute($strSelect) {
         $this->DB_Open();
-        $result = mysqli_query($this->con, $strSelect);
+        $result = mysqli_query($this->con,$strSelect);
         $this->DB_Close();
     }
     
-    function DB_Fetch($resultat) {
-        if ($resultat) {
-            if (mysqli_num_rows($result) > 0) {
-                return (mysqli_fetch_array($result));
+//    function DB_Fetch($result) {
+//        if ($result) {
+//            if (mysqli_num_rows($result) > 0) {
+//                return (mysqli_fetch_array($result));
+//            } else {
+//                return false;  
+//            }
+//        } else {
+//            return false;
+//        }
+//    }
+    
+    
+    function DB_Fetch($resultat){
+        if ($resultat){
+            if (mysqli_num_rows($resultat) > 0){
+                return (mysqli_fetch_array($resultat));
             } else {
-                return false;  
+                return false;
             }
         } else {
             return false;
