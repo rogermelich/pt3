@@ -16,7 +16,6 @@ class general extends connexio {
           $items[$i]=serialize($aut);
           $i=$i+1;
       }
-      echo $items;
       return $items;
     }
     
@@ -30,7 +29,6 @@ class general extends connexio {
           $items[$i]=serialize($llib);
           $i=$i+1;
       }
-      echo $items;
       return $items;
     }
 }
