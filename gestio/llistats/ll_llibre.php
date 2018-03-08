@@ -34,14 +34,14 @@ $gen = new general();
   <?php
   $items=$gen->llistat_llibres();
   foreach($items as $it) {
-      $llib=unserialize($it);
+      $llib=unserialize($it);    
   ?>
 
   <tr>
     <td></td>
     <td class="<?=$class?>"><?=$llib->get_llib_llibre()?></td>
     <td width="8%" colspan="-3" align="right"  class="scr_subTitol">
-      <input name="accio_c" type="button" id="accio_c" value="[consultar]" maxlength="255" onClick="javascript:consultar_document('')" class="input">    </td>
+      <input name="accio_c" type="button" id="accio_c" value="[consultar]" maxlength="255" onClick="javascript:consultar_document('<?=$ruta?>gestio/controladors/c_llibre.php?accio=cl&idllib=<?=$llib->get_llib_idllibre()?>')" class="input">    </td>
   </tr>
   
   <?php

@@ -21,7 +21,7 @@ switch ($_GET['accio']) {
                 $idautor=$_GET['idaut'];
                 $autor = $_POST['autor'];
                 $aut=new autor($ruta);
-                $aut->carregaValors($idaut,$autor);
+                $aut->carregaValors($idautor,$autor);
                 $retorn=$aut->afegeix();
                 header('Location:'.$ruta.'gestio/vistes/v_autor.php?idaut='.$retorn);
                 break;
