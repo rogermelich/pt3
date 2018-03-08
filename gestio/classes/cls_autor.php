@@ -80,6 +80,18 @@ class autor extends connexio {
         $this->aut_idautor = $rs_id['AUT_IDAUTOR'];
         return $this->aut_idautor;
     }
+    
+    function llibre_autor($sql) {
+        $sql = "SELECT LLIB_IDLLIBRE FROM LLIBRES WHERE LLIB_AUTORLLIB=" . $this->aut_idautor;
+        
+        $arrayllib = null;
+        while($rs_r = $this->DB_Fetch($this->DB_Select($sql))){
+            $llib = new llibre();
+            $llibre->inicialitza($rs_r['LLIB_IDLLIBRE']);
+            $arrayllib[] = $llibre;
+        }
+        return $arrayllib;
+    }
 
 }
 

@@ -29,7 +29,7 @@ class llibre extends connexio {
     function carregaValors($id,$llibre,$autorllib) {
         $this->set_llib_idllibre($id);
         $this->set_llib_llibre($llibre);
-        $this->set_Llib_autorllib($llib_autorllib);
+        $this->set_llib_autorllib($autorllib);
     }
     
     function get_llib_idllibre() {
@@ -48,14 +48,15 @@ class llibre extends connexio {
         $this->llib_llibre = $valor;
     }
     
-    function get_Llib_autorllib() {
+    function get_llib_autorllib() {
         return $this->llib_autorllib;
     }
 
-    function set_Llib_autorllib($llib_autorllib) {
-        $this->llib_autorllib = $llib_autorllib;
+    function set_llib_autorllib($valor) {
+        $this->llib_autorllib = $valor;
     }
-    
+
+        
     function textSubmit() {
         if ($this->llib_idllibre == 0)
             return "Acceptar";
@@ -76,13 +77,13 @@ class llibre extends connexio {
     }
     
     function modifica() {
-        $sql="UPDATE LLIBRES SET LLIB_LLIBRE='".$this->llib_llibre."' WHERE LLIB_IDLLIBRE=".$this->llib_idllibre;
+        $sql="UPDATE LLIBRES SET LLIB_LLIBRE='".$this->llib_llibre."', LLIB_AUTORLLIB=".$this->llib_autorllib." WHERE LLIB_IDLLIBRE=".$this->llib_idllibre;
         $this->DB_Execute($sql);
         return $this->llib_idllibre;
     }
     
     function afegeix() {
-        $sql="INSERT INTO LLIBRES (LLIB_LLIBRE) VALUES ('".$this->llib_llibre."')";
+        $sql="INSERT INTO LLIBRES (LLIB_LLIBRE, LLIB_AUTORLLIB) VALUES ('".$this->llib_llibre."',".$this->llib_autorllib.")";
         $this->DB_Execute($sql);
         
         $sql_id="SELECT max(LLIB_IDLLIBRE) AS LLIB_IDLLIBRE FROM LLIBRES";

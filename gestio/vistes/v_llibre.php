@@ -5,6 +5,8 @@ include $ruta . "gestio/classes/cls_includes.php";
 $idllibre = $_GET['idllib'];
 $llib = new llibre();
 $llib->inicialitza($idllibre);
+
+$gen = new general();
 ?>
 <html>
     <head>
@@ -33,6 +35,7 @@ $llib->inicialitza($idllibre);
                         } else {
                             document.formulari.f_submit.value = 'Modificar';
                             document.formulari.llibre.value = document.formulari.h_llibre.value;
+                            document.formulari.llibre.value = document.formulari.h_autorllib.value;
                             document.formulari.llibre.disabled = true;
                         }//tanca l'else
                     }//tanca l'else		
@@ -59,6 +62,7 @@ $llib->inicialitza($idllibre);
         <form name="formulari" action="<?= $ruta ?>gestio/controladors/c_llibre.php?accio=vl&idllib=<?= $idllibre ?>" method="post" enctype="multipart/form-data">
             <input type="hidden" name="h_accio" id="h_accio" value="">
             <input type="hidden" name="h_llibre" id="h_llibre" value="<?= $llib->get_llib_llibre() ?>">
+            <input type="hidden" name="h_autorllib" id="h_autorllib" value="<?= $llib->get_llib_autorllib() ?>">
             <table width="100%">
                 <tr>
                     <td colspan="7" class="sub_titol">Informaci&oacute; del llibre</td>
@@ -77,6 +81,24 @@ $llib->inicialitza($idllibre);
                     <td colspan="4"><input name="llibre" type="text" class="input" id="llibre" value="<?= $llib->get_llib_llibre() ?>" size="75">
                     </td>
                 </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td class="etiqueta">Autor</td>
+                    <td colspan="4">
+                        <select name="autorllib" id="autorllib">
+                            <option selected="selected">Selecciona l'autor</option>
+                            <?php
+                            $items = $gen->llistat_autors();
+                            foreach ($items as $it) {
+                                $aut = unserialize($it);
+                                ?>
+                            <option value="<?= $aut->get_aut_idautor(); ?>" <?php if ($aut->get_aut_idautor() == $llib->get_llib_autorllib()) echo"selected";?>><?= $aut->get_aut_autor(); ?></option>
+                            <?php }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+
             </table>
             <table width="100%">
                 <tr>
